@@ -36,7 +36,7 @@ const getUserLoc = async ()=>{
 //Function to get the get the weather user data
 const getWeatherData = async (Lon, Lat) =>{
     //nEED THE API KEY(PLEASE RESOLVE)
-    const key;
+    const key = "371e3350e42ff3618e3c67c091326f57";
     const Url = `http://api.openweathermap.org/data/2.5/weather?lon=${Lon}&lat=${Lat}&appid=${key}&units=metric`
     console.log("getWeather : apiUrl : ", Url)
     try{
