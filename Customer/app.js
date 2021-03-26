@@ -22,7 +22,17 @@ app.use(cors())
 app.set('view engine', 'ejs')
 app.set('views', './Views')
 
-
+//Simple await call back function to get the userLocatioN
+const getUserLoc = async ()=>{
+    try{
+        //GET THE IP ITSELF
+        const ip = await publicIp.v4()
+        console.log("ip : ", ip)
+        return await iplocate(ip)    
+    }catch(err){
+        console.log(err)
+    }
+}
 
 
 
