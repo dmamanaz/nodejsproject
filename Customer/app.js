@@ -57,12 +57,12 @@ app.get('/', (req,res)=>{
         //Get the weathe  data as well 
         getWeatherData(Lon,Lat).then((res)=>{
             const weather = {
-                description: res.data.weather[0].main,
-                icon: "http://openweathermap.org/img/w/" + res.data.weather[0].icon + ".png",
-                temperature: res.data.main.temp,
-                temp_min: res.data.main.temp_min,
-                temp_max: res.data.main.temp_max,
-                city: res.data.name
+                Description: res.data.weather[0].main,
+                Icon: "http://openweathermap.org/img/w/" + res.data.weather[0].icon + ".png",
+                Temperature: res.data.main.temp,
+                Temp_min: res.data.main.temp_min,
+                Temp_max: res.data.main.temp_max,
+                City: res.data.name
             }
             console.log("weather: ", weather)
             //get the top 3 data for the news list for the insert time 
