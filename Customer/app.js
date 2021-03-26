@@ -41,7 +41,7 @@ const getWeatherData = async (Lon, Lat) =>{
     console.log("getWeather : apiUrl : ", Url)
     try{
         //use axios to connect said api
-        return await axios.get(apiUrl)
+        return await axios.get(Url)
     }catch(err){
         console.log(err)
     }
