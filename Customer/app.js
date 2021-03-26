@@ -9,8 +9,8 @@ import publicIp from 'public-ip'
 //execute the call back functions 
 require('./database')
 //The NewList//CONTACUSLIST
-const Newslist = require('./Models/News_model')
-const Contactuslist = require('./Models/Contact_Model')
+const NewsList = require('./Models/News_model')
+const ContactusList = require('./Models/Contact_Model')
 const app = express()
 //Set the enviroment port
 app.set('port', process.env.PORT || 7080);
@@ -33,6 +33,56 @@ const getUserLoc = async ()=>{
         console.log(err)
     }
 }
+//Function to get the get the weather user data
+const getWeatherData = async (Lon, Lat) =>{
+    //nEED THE API KEY(PLEASE RESOLVE)
+    const key;
+    const Url = `http://api.openweathermap.org/data/2.5/weather?lon=${Lon}&lat=${Lat}&appid=${key}&units=metric`
+    console.log("getWeather : apiUrl : ", Url)
+    try{
+        //use axios to connect said api
+        return await axios.get(apiUrl)
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+app.get('/', (req,res)=>{
+
+    getUserLoc().then((loc)=>{  
+        const Lon = loc.longitude
+        const Lat = loc.latitude
+        console.log(`lon: ${Lon}, lat: ${Lat}`)
+        //Get the weathe  data as well 
+        getWeatherData(Lon,Lat).then((res)=>{
+            const weather = {
+                description: res.data.weather[0].main,
+                icon: "http://openweathermap.org/img/w/" + res.data.weather[0].icon + ".png",
+                temperature: res.data.main.temp,
+                temp_min: res.data.main.temp_min,
+                temp_max: res.data.main.temp_max,
+                city: res.data.name
+            }
+            console.log("weather: ", weather)
+            //get the top 3 data for the news list 
+            NewsList.find({}).limit(3).sort( {insertTime: -1} ).exec( (err,data)=>{
+                if(err)
+                    console.error(err);
+                else
+                {
+                    console.log("news : ", data)
+                    res.render('Home.ejs', {
+                        weather,
+                        data
+                    })
+                }
+            })
+    
+        })
+    })
+})
+
 
 
 
