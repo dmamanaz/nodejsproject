@@ -10,7 +10,7 @@ import publicIp from 'public-ip'
 require('./database')
 //The NewList//CONTACUSLIST
 const NewsList = require('./Models/News_model')
-const ContactusList = require('./Models/Contact_Model')
+const Contactus_List = require('./Models/Contact_Model')
 const app = express()
 //Set the enviroment port
 app.set('port', process.env.PORT || 7080);

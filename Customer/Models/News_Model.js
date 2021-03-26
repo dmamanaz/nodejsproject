@@ -8,4 +8,4 @@ const NewsModel = new Schema({
     News_publishedAt: {type:String},
     News_insertTime: {type:Number}
 })
-module.exports = mongoose.model("News", ContactUsModel,"News_list")
+module.exports = mongoose.model("News", NewsModel,"News_list")
