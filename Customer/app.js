@@ -65,7 +65,7 @@ app.get('/', (req,res)=>{
                 city: res.data.name
             }
             console.log("weather: ", weather)
-            //get the top 3 data for the news list 
+            //get the top 3 data for the news list for the insert time 
             NewsList.find({}).limit(3).sort( {insertTime: -1} ).exec( (err,data)=>{
                 if(err)
                     console.error(err);
