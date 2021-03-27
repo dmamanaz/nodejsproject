@@ -8,7 +8,7 @@ import iplocate from 'node-iplocate'
 import publicIp from 'public-ip'
 //execute the call back functions 
 require('./database')
-//The NewList//CONTACUSLIST
+//The NewList//ContactUSList
 const NewsList = require('./Models/News_model')
 const Contactus_List = require('./Models/Contact_Model')
 const app = express()
@@ -52,7 +52,7 @@ app.get('/', (req,res)=>{
         const Lon = loc.longitude
         const Lat = loc.latitude
         console.log(`lon: ${Lon}, lat: ${Lat}`)
-        //Get the weathe  data as well 
+        //Get the weather  data as well 
     getWeatherData(Lon,Lat).then((res)=>{
             const weather = {
                 Description: res.data.weather[0].main,
@@ -127,7 +127,6 @@ app.post('/addContactUs', (req,res)=>{
                 const htmlMsg = encodeURIComponent('ContactUs Message Saved OK !');
                 res.redirect('/contact_us/?msg=' + htmlMsg)
             }
-            
         }) 
     
 })
@@ -142,9 +141,9 @@ const server = http.createServer(app).listen(app.get('port'), () => {
 const io = require('socket.io').listen(server);
 //list of users for the chat room 
 const list_of_users = [];
-
 io.on('connection',(socket) =>
 {
+    //Uppon connection 
     socket.on('connect',()=>
     {
         console.log("New connection formed: ", socket.id);
@@ -172,6 +171,4 @@ io.on('connection',(socket) =>
         const generated_response = `${time_stamp} : ${socket.nickname} : ${data.message}`
         io.emit('chat',generated_response);
     })
-
-
 });
