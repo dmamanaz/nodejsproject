@@ -46,8 +46,6 @@ const getWeatherData = async (Lon, Lat) =>{
         console.log(err)
     }
 }
-
-
 app.get('/', (req,res)=>{
 
     getUserLoc().then((loc)=>{  
@@ -55,7 +53,7 @@ app.get('/', (req,res)=>{
         const Lat = loc.latitude
         console.log(`lon: ${Lon}, lat: ${Lat}`)
         //Get the weathe  data as well 
-        getWeatherData(Lon,Lat).then((res)=>{
+    getWeatherData(Lon,Lat).then((res)=>{
             const weather = {
                 Description: res.data.weather[0].main,
                 Icon: "http://openweathermap.org/img/w/" + res.data.weather[0].icon + ".png",
@@ -82,7 +80,57 @@ app.get('/', (req,res)=>{
         })
     })
 })
+app.get('/sports',(req,res)=>
+{
+    const apiUrl = 'https://newsapi.org/v2/top-headlines'
+    //include the todays_date
+    const todays_date = new Date().toISOString().substring(0,10);
+    axios.get(apiUrl,{
 
+        params:{
+            sources:'espn, nfl-news, the-sports-bible',
+            from: todays_date,
+            sortBy:'Popularity',
+            language:'en',
+            apiKey:'884aeb5b9df34b4080592935e05a5417'
+            
+        }
+    }).then((res) =>
+    {
+        const data = res.data.articles;
+        res.render('Sport.ejs',data);
+    }).catch(function(err)
+    {
+        console.log(err);
+    })
+    
+})
+app.get('/about_us', (req,res)=>{
+    res.render('about_us.ejs')
+})
+app.get('/contact_us', (req,res)=>{
+    res.render('contact_us.ejs', {
+        msg: req.query.msg?req.query.msg:''
+    })
+})
+app.post('/addContactUs', (req,res)=>{
+    console.log("/addContactUs : req.body : ", req.body)
+    
+    const record = req.body
+    Contactus_List.create(
+            record  
+        , (err, data) => {
+            if(err){
+                const htmlMsg = encodeURIComponent('Error : ', error);
+                res.redirect('/contact_us/?msg=' + htmlMsg)
+            }else{
+                const htmlMsg = encodeURIComponent('ContactUs Message Saved OK !');
+                res.redirect('/contact_us/?msg=' + htmlMsg)
+            }
+            
+        }) 
+    
+})
 
 
 
@@ -90,4 +138,40 @@ app.get('/', (req,res)=>{
 const server = http.createServer(app).listen(app.get('port'), () => {
     console.log("Creating the server chat rooms " + app.get('port'));
 });
+//Create the io
 const io = require('socket.io').listen(server);
+//list of users for the chat room 
+const list_of_users = [];
+
+io.on('connection',(socket) =>
+{
+    socket.on('connect',()=>
+    {
+        console.log("New connection formed: ", socket.id);
+    })
+    //Disconnect the user that wants to disconnect. Keep the other ones in check. Filter the poeple who want to be  left pver
+    socket.on('disconnect',()=>
+    {
+        console.log("Disconnecting user: ", socket.nickname);
+        const user_left_over = list_of_users.filter(user => user != socket.nickname);
+        list_of_users= user_left_over;
+        io.emit('userlist', list_of_users);
+    })
+    //Create of a new alias.
+    socket.on('alias', (nickname)=>
+    {
+        console.log("Alias Formed: " , nickname);
+        socket.nickname = nickname;
+        list_of_users.push(socket.nickname);
+        io.emit('userlist',list_of_users);
+    })
+    //The event associated when the users wants to create a message
+    socket.on('chat',(data) =>
+    {
+        const  time_stamp = new Date().toLocaleString();
+        const generated_response = `${time_stamp} : ${socket.nickname} : ${data.message}`
+        io.emit('chat',generated_response);
+    })
+
+
+});
