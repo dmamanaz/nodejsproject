@@ -83,7 +83,7 @@ app.get('/', (req,res)=>{
 app.get('/sports',(req,res)=>
 {
     const apiUrl = 'https://newsapi.org/v2/top-headlines'
-    //include the todays_date
+    //include the todays_date in ISO format
     const todays_date = new Date().toISOString().substring(0,10);
     axios.get(apiUrl,{
 
