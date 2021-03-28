@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,43 +8,31 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <script src = "../Public/chatclient_handler.js"></script>
     <title>Home</title>
-   
+    <%-include('./Partials/header.ejs')%>
 </head>
 
 <body>
-    <!-- Header section -->
- 
-   
+    <!-- Header section -->\
     <!-- Weather report section -->
     <div class="container">
-        <div >
-            <h2>City: <%=res.city.name%></h2>
-        </div>
-        <hr/>
         <div class="row">
-                <%for(let i=0; i<weather.length;i++){%>
-                <div class="card col-md-2">
+                <div class="card col-lg-6">
                     <div class="row">
-                    <img class="card-img-top" src='"http://openweathermap.org/img/w/" + res.data.weather[0].icon + ".png"' alt="weather"/>
-                    <span class="topTemp"><%=weather[i].res.data.main.temp>°C</span>
+                     <span>City: <%=weather.City%></span>
+                     <img class="card-img-top" src= <%=weather.Icon%>>
+                    <span class="topTemp"><%=weather.Description%>°C</span>
                     </div>
                     <div class="card-body">
-                    <span class="max"><%=weather[i].res.data.main.temp_max%>°C</span>   
-                              <span class="min"><%=weather[i].res.data.main.temp_min%>°C</span>
-                        <h4 class="card-title"><%=weather[i].res.data.weather[0].main%></h4>
-                        <p class="card-text">
-                            <p class="day"><%=Date(weather[i].res.list[i].dt)%> </p>
-                            
-                            <p>Humidity: <%=weather[i].res.list[i].humidity%>%</p>
-                            
-                        </p>
+                    <span class="max"><%=weather.Temp_max%>°C</span> 
+                    <span class="min"> <%=weather.Temp_min%>°C</span>
+                        <h4 class="card-title"><%=weather.Temperature%></h4>
                     </div>
                 </div>
-                <%}%>
             </div>
-
+        </div>
+    
 </div>
     <style>
         .carousel-item {
@@ -86,11 +73,9 @@
                     </div>
                 </div>
             </div>
-
             <div class="carousel-item">
                 <div class="container">
-                    <img class='img-fluid w-100' src="">
-                    <!-- /images/icons/flower.jpg -->
+                    <img class='img-fluid w-100' src = "">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Third news</h5>
                         <p>Third news info</p>
@@ -149,15 +134,6 @@
         </div>
         Content here 
       </div>
-    
-
-
-
-
-
-
-
-
     <!-- Optional JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">  </script>
@@ -172,7 +148,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-         
+
+<footer>
+    <%-include('./Partials/footer.ejs')%>
+</footer>
 </body>
 
 </html>

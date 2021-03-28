@@ -4,8 +4,11 @@ import axios from 'axios'
 import cors from 'cors'
 import path from 'path'
 import http from 'http'
-import iplocate from 'node-iplocate'
-import publicIp from 'public-ip'
+import 'babel-polyfill'
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+const iplocate = require("node-iplocate")
+const publicIp = require('public-ip')
 //execute the call back functions 
 require('./database')
 //The NewList//ContactUSList
@@ -14,7 +17,7 @@ const Contactus_List = require('./Models/Contact_Model')
 const app = express()
 //Set the enviroment port
 app.set('port', process.env.PORT || 7080);
-app.use(express.static(path.join(__dirname, 'Public')));
+app.use(express.static(path.join(__dirname, './Public')));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use(cors())
@@ -27,10 +30,11 @@ const getUserLoc = async ()=>{
     try{
         //GET THE IP ITSELF
         const ip = await publicIp.v4()
-        console.log("ip : ", ip)
-        return await iplocate(ip)    
+        const response =  await iplocate(ip);
+        console.log(response);
+        return   response;
     }catch(err){
-        console.log(err)
+        console.log(err);
     }
 }
 //Function to get the get the weather user data
@@ -51,22 +55,22 @@ app.get('/', (req,res)=>{
     getUserLoc().then((loc)=>{  
         const Lon = loc.longitude
         const Lat = loc.latitude
-        console.log(`lon: ${Lon}, lat: ${Lat}`)
+        console.log(Lon  + " " + Lat)
         //Get the weather  data as well 
-    getWeatherData(Lon,Lat).then((res)=>{
+        getWeatherData(Lon,Lat).then((response)=>{
             const weather = {
-                Description: res.data.weather[0].main,
-                Icon: "http://openweathermap.org/img/w/" + res.data.weather[0].icon + ".png",
-                Temperature: res.data.main.temp,
-                Temp_min: res.data.main.temp_min,
-                Temp_max: res.data.main.temp_max,
-                City: res.data.name
+                Description: response.data.weather[0].main ,
+                Icon: "http://openweathermap.org/img/wn/" + response.data.weather[0].icon + ".png",
+                Temperature: response.data.main.temp,
+                Temp_min: response.data.main.temp_min,
+                Temp_max: response.data.main.temp_max,
+                City: response.data.name
             }
-            console.log("weather: ", weather)
+            
             //get the top 3 data for the news list for the insert time 
             NewsList.find({}).limit(3).sort( {insertTime: -1} ).exec( (err,data)=>{
                 if(err)
-                    console.error(err);
+                    throw err;
                 else
                 {
                     console.log("news : ", data)

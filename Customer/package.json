@@ -23,6 +23,7 @@
     "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
+    "core-js": "^3.9.1",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "ejs": "^2.6.2",
@@ -31,6 +32,11 @@
     "mongoose": "^5.6.9",
     "node-iplocate": "^1.0.1",
     "public-ip": "^3.2.0",
+    "regenerator-runtime": "^0.13.7",
     "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-runtime": "^6.26.0"
   }
 }
