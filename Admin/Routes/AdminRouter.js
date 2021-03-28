@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const LocalStorage = require('node-localstorage').LocalStorage;
 const localStorage = new LocalStorage('./Scratch');
-
 const config = require('../config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
