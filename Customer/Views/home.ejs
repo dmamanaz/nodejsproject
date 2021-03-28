@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Home</title>
+   
+</head>
+
+<body>
+    <!-- Header section -->
+ 
+   
+    <!-- Weather report section -->
+    <div class="container">
+        <div >
+            <h2>City: <%=res.city.name%></h2>
+        </div>
+        <hr/>
+        <div class="row">
+                <%for(let i=0; i<weather.length;i++){%>
+                <div class="card col-md-2">
+                    <div class="row">
+                    <img class="card-img-top" src='"http://openweathermap.org/img/w/" + res.data.weather[0].icon + ".png"' alt="weather"/>
+                    <span class="topTemp"><%=weather[i].res.data.main.temp>°C</span>
+                    </div>
+                    <div class="card-body">
+                    <span class="max"><%=weather[i].res.data.main.temp_max%>°C</span>   
+                              <span class="min"><%=weather[i].res.data.main.temp_min%>°C</span>
+                        <h4 class="card-title"><%=weather[i].res.data.weather[0].main%></h4>
+                        <p class="card-text">
+                            <p class="day"><%=Date(weather[i].res.list[i].dt)%> </p>
+                            
+                            <p>Humidity: <%=weather[i].res.list[i].humidity%>%</p>
+                            
+                        </p>
+                    </div>
+                </div>
+                <%}%>
+            </div>
+
+</div>
+    <style>
+        .carousel-item {
+            height: 20rm;
+            background: #000;
+            color: white;
+            position: relative;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+    <div class="col-sm-6">
+    <div id="imgCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="imgCarousel" data-slide-to="0" class="active" data-interval="2000"></li>
+            <li data-target="imgCarousel" data-slide-to="1"></li>
+            <li data-target="imgCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="1000">
+                <div class="container">
+                    <img class='img-fluid w-100' src=""> 
+                    <!-- /images/icons/soccer.jpg -->
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>First news</h5>
+                        <p>First news info</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item" data-interval="500">
+                <div class="container">
+                    <img class='img-fluid w-100' src="">
+                    <!-- /images/icons/football.jpg -->
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Second news</h5>
+                        <p>Second news info</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="container">
+                    <img class='img-fluid w-100' src="">
+                    <!-- /images/icons/flower.jpg -->
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Third news</h5>
+                        <p>Third news info</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#imgCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <a>News title here</a>
+      </div>
+      <div class="col-sm">
+        <img src='... '/>
+      </div>
+      <div class="col-sm">
+        <a>News descrption</a>
+      </div>
+    </div>
+  </div>
+  
+    
+    <div class="media">
+        <div class="media-body">
+          <h5 class="mt-0">Some story realted to news</h5>
+          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+        </div>
+      </div>
+
+    </div>
+
+  
+   
+      <!-- Extra chatbox idea -->
+      <div class="container">
+        <div class="card" id="wrapper">
+            <div id="menu">
+                <p class="welcome">Welcome, <b></b></p>
+            </div>
+        
+            <div id="chatbox"></div>
+        
+            <form name="message" action="">
+                <input name="usermsg" type="text" id="usermsg" />
+                <input name="submitmsg" type="submit" id="submitmsg" value="Send" />
+            </form>
+        </div>
+        Content here 
+      </div>
+    
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">  </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+         
+</body>
+
+</html>
