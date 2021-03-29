@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ConstactUs</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" >
+    <%-include('./Partials/header.ejs')%>
+</head>
+<body>
+    <div class="contactHead">
+        <h1>Contact Us</h1>
+    </div>
+
+    <form name = "contactForm" action="/addContactUs" method = "POST"> <!--  -->
+        <div class="row">
+        
+            <div class="column">
+                <label for = "emailId">Email</label>
+                <input type="email" id = "emailId" class="form-control" placeholder="Your Email">
+            </div>
+
+            <div class="column">
+                <label for = "queryId">Query</label>
+                <input type="text" id = "queryId" class="form-control" placeholder="">
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <footer>
+        <%-include('./Partials/footer.ejs')%>
+    </footer>
+</body>
+</html>
