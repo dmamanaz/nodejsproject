@@ -113,6 +113,7 @@ app.get('/about_us', (req,res)=>{
     res.render('about_us.ejs')
 })
 app.get('/contact_us', (req,res)=>{
+    
     res.render('contact_us.ejs', {
         msg: req.query.msg?req.query.msg:''
     })
@@ -126,6 +127,7 @@ app.post('/addContactUs', (req,res)=>{
         , (err, data) => {
             if(err){
                 const htmlMsg = encodeURIComponent('Error : ', error);
+            
                 res.redirect('/contact_us/?msg=' + htmlMsg)
             }else{
                 const htmlMsg = encodeURIComponent('ContactUs Message Saved OK !');

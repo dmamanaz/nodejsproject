@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang = "en">
-<link rel="stylesheet" type="text/css" href="contactStyles.css">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/contactStyles.css">
     <title>ContactUs</title>
     <%-include('./Partials/header.ejs')%>
 </head>
 <body>
+    
+
     <div class="contactHead">
         <h1>Contact Us</h1>
     </div>
@@ -25,18 +28,16 @@
                 <textarea class = "form-control" id="Contact_message" name="Contact_message" rows="4" cols="50" placeholder="What is your concern?"></textarea>
                 
             </div>
-
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" onclick  = "myFunction()">Submit</button>
         </div>
     </form>
     
     <!-- Find way to hide and display message if successful. -->
-    <div class="alert alert-info" style="visibility: hidden" role="alert" id="msg">
-        <%=msg%>
+    <div class="alert alert-info"  style = <%=msg? 'visibility: visible': 'visibility: hidden'%> id="msg">
+                <%=msg%>
     </div>
-
 </body>
 <footer>
     <%-include('./Partials/footer.ejs')%>
