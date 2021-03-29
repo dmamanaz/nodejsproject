@@ -7,4 +7,4 @@ const UserModel = new Schema({
     User_Password: {type:String}
 })
 
-module.exports = mongoose.model('user', UserModel, 'user_list')
+module.exports = mongoose.model('user', UserModel, 'edureka_accounts')

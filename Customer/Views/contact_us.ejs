@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ConstactUs</title>
+    <title>ContactUs</title>
     <%-include('./Partials/header.ejs')%>
 </head>
 <body>
@@ -17,11 +17,11 @@
         
             <div class="column1">
                 <label for = "Contact_email">Email</label>
-                <input type="email" id = "Contact_email" class="form-control" placeholder="Your Email">
+                <input type="email" id = "Contact_email" name = "Contact_email" class="form-control" placeholder="Your Email">
             </div>
 
             <div class="column2">
-                <label for = "Contact_message">Query</label>
+                <label for = "Contact_message">Message</label>
                 <textarea class = "form-control" id="Contact_message" name="Contact_message" rows="4" cols="50" placeholder="What is your concern?"></textarea>
                 
             </div>
