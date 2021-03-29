@@ -144,7 +144,7 @@ const server = http.createServer(app).listen(app.get('port'), () => {
 //Create the io
 const io = require('socket.io').listen(server);
 //list of users for the chat room 
-const list_of_users = [];
+let list_of_users = [];
 io.on('connection',(socket) =>
 {
     //Uppon connection 
