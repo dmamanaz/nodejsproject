@@ -134,9 +134,6 @@ app.post('/addContactUs', (req,res)=>{
         }) 
     
 })
-
-
-
 //Create the server for the chat rooms 
 const server = http.createServer(app).listen(app.get('port'), () => {
     console.log("Creating the server chat rooms " + app.get('port'));
