@@ -5,4 +5,4 @@ const ContactUsModel = new Schema(
     Contact_email:{type:String},
     Contact_message:{type:String},
 })
-module.exports = mongoose.model("Contactus", ContactUsModel,"Contactus_List")
+module.exports = mongoose.model("Contactus", ContactUsModel,"edureka_contacts")

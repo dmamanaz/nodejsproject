@@ -8,13 +8,14 @@ import socketIO from 'socket.io'
 import 'babel-polyfill'
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import mongoose from 'mongoose'
 const iplocate = require("node-iplocate")
 const publicIp = require('public-ip')
 //execute the call back functions 
 require('./database')
 //The NewList//ContactUSList
-const NewsList = require('./Models/News_model')
-const Contactus_List = require('./Models/Contact_Model')
+ let NewsModel = require('./Models/News_model')
+let  ContactusModel = require('./Models/Contact_Model')
 const app = express()
 //Set the enviroment port
 app.set('port', process.env.PORT || 7080);
@@ -68,18 +69,16 @@ app.get('/', (req,res)=>{
                 City: response.data.name
             }
             
-            //get the top 3 data for the news list for the insert time 
-            NewsList.find({}).limit(3).sort( {insertTime: -1} ).exec( (err,data)=>{
-                if(err)
-                    throw err;
-                else
-                {
-                    console.log("news : ", data)
-                    res.render('Home.ejs', {
-                        weather,
-                        data
-                    })
-                }
+            
+            NewsModel.find({}).limit(3).sort( {"News_insertTime": -1} ).exec( (err,data)=>{
+                console.log(err)
+                const news = data
+                console.log("news : ", news)
+                
+                res.render('home', {
+                    weather,
+                    news
+                })
             })
     
         })
@@ -122,7 +121,7 @@ app.post('/addContactUs', (req,res)=>{
     console.log("/addContactUs : req.body : ", req.body)
     
     const record = req.body
-    Contactus_List.create(
+    ContactusModel.create(
             record  
         , (err, data) => {
             if(err){
