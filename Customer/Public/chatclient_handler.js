@@ -1,4 +1,4 @@
-const socket = io()
+const socket = io().connect()
 let isNickSet = false
 socket.on('chat', (data) => {
     $('textarea').val($('textarea').val() + data + '\n')
