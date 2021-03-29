@@ -17,7 +17,7 @@ const Contactus_List = require('./Models/Contact_Model')
 const app = express()
 //Set the enviroment port
 app.set('port', process.env.PORT || 7080);
-app.use(express.static(path.join(__dirname, './Public')));
+app.use(express.static(path.join(__dirname, 'Public')));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use(cors())
