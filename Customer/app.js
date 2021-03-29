@@ -4,16 +4,18 @@ import axios from 'axios'
 import cors from 'cors'
 import path from 'path'
 import http from 'http'
+import socketIO from 'socket.io'
 import 'babel-polyfill'
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import mongoose from 'mongoose'
 const iplocate = require("node-iplocate")
 const publicIp = require('public-ip')
 //execute the call back functions 
 require('./database')
 //The NewList//ContactUSList
-const NewsList = require('./Models/News_model')
-const Contactus_List = require('./Models/Contact_Model')
+ let NewsModel = require('./Models/News_model')
+let  ContactusModel = require('./Models/Contact_Model')
 const app = express()
 //Set the enviroment port
 app.set('port', process.env.PORT || 7080);
@@ -67,18 +69,16 @@ app.get('/', (req,res)=>{
                 City: response.data.name
             }
             
-            //get the top 3 data for the news list for the insert time 
-            NewsList.find({}).limit(3).sort( {insertTime: -1} ).exec( (err,data)=>{
-                if(err)
-                    throw err;
-                else
-                {
-                    console.log("news : ", data)
-                    res.render('Home.ejs', {
-                        weather,
-                        data
-                    })
-                }
+            
+            NewsModel.find({}).limit(3).sort( {"News_insertTime": -1} ).exec( (err,data)=>{
+                console.log(err)
+                const news = data
+                console.log("news : ", news)
+                
+                res.render('home', {
+                    weather,
+                    news
+                })
             })
     
         })
@@ -121,7 +121,7 @@ app.post('/addContactUs', (req,res)=>{
     console.log("/addContactUs : req.body : ", req.body)
     
     const record = req.body
-    Contactus_List.create(
+    ContactusModel.create(
             record  
         , (err, data) => {
             if(err){
@@ -134,45 +134,41 @@ app.post('/addContactUs', (req,res)=>{
         }) 
     
 })
-
-
-
 //Create the server for the chat rooms 
 const server = http.createServer(app).listen(app.get('port'), () => {
     console.log("Creating the server chat rooms " + app.get('port'));
 });
-//Create the io
 const io = require('socket.io').listen(server);
-//list of users for the chat room 
-let list_of_users = [];
-io.on('connection',(socket) =>
-{
-    //Uppon connection 
-    socket.on('connect',()=>
-    {
-        console.log("New connection formed: ", socket.id);
+let users = [];
+io.on('connection',  (socket) => {
+
+    socket.on('connect', ()=>{
+        console.log("New connection socket.id : ", socket.id)
     })
-    //Disconnect the user that wants to disconnect. Keep the other ones in check. Filter the poeple who want to be  left pver
-    socket.on('disconnect',()=>
-    {
-        console.log("Disconnecting user: ", socket.nickname);
-        const user_left_over = list_of_users.filter(user => user != socket.nickname);
-        list_of_users= user_left_over;
-        io.emit('userlist', list_of_users);
+
+    socket.on('disconnect', ()=>{
+        const updatedUsers = users.filter(user => user != socket.nickname)
+        users = updatedUsers
+        io.emit('userlist', users)
     })
-    //Create of a new alias.
-    socket.on('alias', (nickname)=>
-    {
-        console.log("Alias Formed: " , nickname);
-        socket.nickname = nickname;
-        list_of_users.push(socket.nickname);
-        io.emit('userlist',list_of_users);
-    })
-    //The event associated when the users wants to create a message
-    socket.on('chat',(data) =>
-    {
-        const  time_stamp = new Date().toLocaleString();
-        const generated_response = `${time_stamp} : ${socket.nickname} : ${data.message}`
-        io.emit('chat',generated_response);
-    })
+
+   
+    socket.on('nick', (nickname) => {
+        console.log("nick => nickname : ", nickname)
+        socket.nickname = nickname
+        users.push(nickname)
+
+        console.log("server : users : ", users)
+       
+        io.emit('userlist', users);
+    });
+    socket.on('chat', (data) => {
+        console.log("chat => nickname : ", socket.nickname)
+        const d = new Date()
+        const ts = d.toLocaleString()
+        const response = `${ts} : ${socket.nickname} : ${data.message}`
+        io.emit('chat', response)
+    });
 });
+
+

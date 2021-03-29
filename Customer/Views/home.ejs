@@ -62,7 +62,7 @@
     </style>
     <div class="container-fluid">
         <div class="row">
-            <div class="card ">
+            <div class="card " >
                 <div class="card-body">
                     <div class="card-text">
                         <div class="title">
@@ -82,53 +82,55 @@
             </div>
         </div>
 
-    </div><hr>
+    </div>
     <style>
         .carousel-item {
             height: 20rm;
-            background: #000;
+            background: white;
             color: white;
             position: relative;
             background-position: center;
             background-size: cover;
+            height: 100vh;
+            width: 100%;
+            min-height: 400px;
+ 
+
         }
+
     </style>
-    <div class="col-sm-6">
+    <div class="col-lg-12">
         <div id="imgCarousel" class="carousel slide carousel-fade" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="imgCarousel" data-slide-to="0" class="active" data-interval="2000"></li>
+                <li data-target="imgCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="imgCarousel" data-slide-to="1"></li>
                 <li data-target="imgCarousel" data-slide-to="2"></li>
             </ol>
-            <div class="carousel-inner">
+           
+            <div class="carousel-inner ">
                 <div class="carousel-item active" data-interval="1000">
                     <div class="container">
-                        <img class='img-fluid w-100' src="">
-                        <!-- /images/icons/soccer.jpg -->
+                        <img class='img-fluid w-75' src=<%=news[0].News_urlToImage%>>
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>First news</h5>
-                            <p>First news info</p>
+                            <h5>Financial news</h5>
                         </div>
                     </div>
                 </div>
 
                 <div class="carousel-item" data-interval="500">
                     <div class="container">
-                        <img class='img-fluid w-100' src="">
-                        <!-- /images/icons/football.jpg -->
+                        <img class='img-fluid w-75' src=<%=news[1].News_urlToImage%>>
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Second news</h5>
-                            <p>Second news info</p>
+                            <h5>Sport news</h5>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item">
+            
+            <div class="carousel-item " data-interval="200">
                 <div class="container">
-                    <img class='img-fluid w-100' src = "" >
+                    <img class='img-fluid w-75' src = <%=news[2].News_urlToImage%> >
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>Third news</h5>
-                        <p>Third news info</p>
+                        <h5>Cultural news</h5>
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
@@ -140,7 +142,9 @@
                     <span class="sr-only">Next</span>
             </div>
         </div>
+        </div>
     </div>
+   
     <div class="container">
         <div class="row">
             <div class="col-sm">
@@ -157,8 +161,8 @@
 
     <div class="media">
         <div class="media-body">
-            <h5 class="mt-0">Some story realted to news</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+            <h5 class="mt-0">Some story related to news</h5>
+                    Some hard coded news
         </div>
     </div>
     </div>
@@ -170,7 +174,7 @@
         <div class="card" id="wrapper">
             <div id="menu">
                 <p class="welcome">Welcome, <b></b></p>
-            </div>
+    </div>
         
             <div id="chatbox"></div>
         
