@@ -29,14 +29,14 @@
             </div>
             <div class="row">
                 <%for(let i=0; i<sport.length; i++) {%>
-                <div class="card" style="width: 30rem;">
+                <div class="card" style="width: 50%;">
                     <a href=<%= sport[i].url%>>
                         <img class="card-img-top" src=<%=sport[i].urlToImage%> alt="Card image cap">
                     </a>
                     <div class="card-body">
                       <h5 class="card-title"><%= sport[i].title%></h5>
                       <small><%= sport[i].publishedAt.substring(0,10)%></small>
-                      <p class="card-text"><%= sport[i].description%></p>
+                      <small class="card-text"><%= sport[i].description%></small>
                     </div>
                 </div>
                 <%}%>
