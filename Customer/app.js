@@ -128,41 +128,43 @@ app.post('/addContactUs', (req,res)=>{
         }) 
     
 })
+
+app.use(express.static(path.join(__dirname,'chat')))
 //Create the server for the chat rooms 
-const server = http.createServer(app).listen(app.get('port'), () => {
-    console.log("Creating the server chat rooms " + app.get('port'));
-});
-const io = require('socket.io').listen(server);
-let users = [];
-io.on('connection',  (socket) => {
-
-    socket.on('connect', ()=>{
-        console.log("New connection socket.id : ", socket.id)
-    })
-
-    socket.on('disconnect', ()=>{
-        const updatedUsers = users.filter(user => user != socket.nickname)
-        users = updatedUsers
-        io.emit('userlist', users)
-    })
-
-   
-    socket.on('nick', (nickname) => {
-        console.log("nick => nickname : ", nickname)
-        socket.nickname = nickname
-        users.push(nickname)
-
-        console.log("server : users : ", users)
-       
-        io.emit('userlist', users);
+    const server = http.createServer(app).listen(app.get('port'), () => {
+        console.log("Creating the server chat rooms " + app.get('port'));
     });
-    socket.on('chat', (data) => {
-        console.log("chat => nickname : ", socket.nickname)
-        const d = new Date()
-        const ts = d.toLocaleString()
-        const response = `${ts} : ${socket.nickname} : ${data.message}`
-        io.emit('chat', response)
+    const io = require('socket.io').listen(server);
+    let users = [];
+    io.on('connection',  (socket) => {
+
+        socket.on('connect', ()=>{
+            console.log("New connection socket.id : ", socket.id)
+        })
+
+        socket.on('disconnect', ()=>{
+            const updatedUsers = users.filter(user => user != socket.nickname)
+            users = updatedUsers
+            io.emit('userlist', users)
+        })
+
+    
+        socket.on('nick', (nickname) => {
+            console.log("nick => nickname : ", nickname)
+            socket.nickname = nickname
+            users.push(nickname)
+
+            console.log("server : users : ", users)
+        
+            io.emit('userlist', users);
+        });
+        socket.on('chat', (data) => {
+            console.log("chat => nickname : ", socket.nickname)
+            const d = new Date()
+            const ts = d.toLocaleString()
+            const response = `${ts} : ${socket.nickname} : ${data.message}`
+            io.emit('chat', response)
+        });
     });
-});
 
 
