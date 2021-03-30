@@ -84,7 +84,7 @@ app.get('/', (req,res)=>{
         })
     })
 })
-app.get('/sports',(req,res)=>
+app.get('/sports',(req,response)=>
 {
     const apiUrl = 'https://newsapi.org/v2/top-headlines'
     //include the todays_date in ISO format
@@ -97,12 +97,12 @@ app.get('/sports',(req,res)=>
             sortBy:'Popularity',
             language:'en',
             apiKey:'884aeb5b9df34b4080592935e05a5417'
-            
         }
     }).then((res) =>
     {
         const data = res.data.articles;
-        res.render('Sport.ejs',data);
+        console.log(data);
+        response.render('Sport.ejs',data);
     }).catch(function(err)
     {
         console.log(err);

@@ -9,12 +9,9 @@
     <%-include('./Partials/header.ejs')%>
 </head>
 <body>
-    
-
     <div class="contactHead">
         <h1>Contact Us</h1>
     </div>
-
     <form name = "contactForm" action="/addContactUs" method = "POST"> <!--  -->
         <div class="row">
         
@@ -35,7 +32,7 @@
     </form>
     
     <!-- Find way to hide and display message if successful. -->
-    <div class="alert alert-info"  style = <%=msg? 'visibility: visible': 'visibility: hidden'%> id="msg">
+    <div class="alert alert-info"  style = <%=msg?'visibility: visible': 'visibility: hidden'%> id="msg">
                 <%=msg%>
     </div>
 </body>
