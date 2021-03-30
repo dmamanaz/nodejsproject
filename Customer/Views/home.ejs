@@ -113,19 +113,56 @@
     <style>
         .carousel-item {
             /* height: 20rm; */
-            background: white;
+            background: black;
             color: white;
             position: relative;
             background-position: center;
             background-size: cover;
-            height: 50vh;
+            height: 45vh;
             width: 100%;
             padding-top: 0%;
+
         }
+
+        #caroRow {
+            background-color: #002cb195;
+            border: 4px solid black;
+            width: 70%;
+            height: 450px;
+            border-radius: 30px;
+            margin: auto;
+            text-align: center;
+    
+            
+        }
+
+        #innerCaroImg {
+            display: inline-block;
+            height: 50%;
+            
+            
+        }
+
+        .carousel-inner {
+            
+        }
+
+        #rowCarosel {
+            
+        }
+
+        #imgCarousel {
+            
+        }
+
+
+
+
+
     </style>
-    <div class="row">
-        <div class="container w-50 h-10 d-inline-block" style="background-color:black;">
-            <div class="row">
+    <div class="row" id="caroRow">
+        <div class="container w-50 h-10 d-inline-block" style="background-color:black;" id="innerCaroImg">
+            <div class="row" id="rowCarosel">
                 <div id="imgCarousel" class="carousel slide carousel-fade" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="imgCarousel" data-slide-to="0" class="active"></li>

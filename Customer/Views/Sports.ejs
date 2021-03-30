@@ -15,16 +15,13 @@
         .row{
             display: flex;
             flex-wrap: wrap;
-            padding: 0 4px;
+            padding-top: 1%;
+            padding-bottom: 1%;
         }
         .card-img-top {
             margin-top: 8px;
             vertical-align: middle;
-<<<<<<< HEAD
             width: 40rem;
-=======
-            width: 30rem;
->>>>>>> 6d8582a51cc456956b26ca8771f6c0586016e3b3
             height: 25rem;
         }
     </style>
@@ -37,15 +34,10 @@
                 <%for(let i=0; i<sport.length; i++) {%>
                 <div class="card" style="width: 50%;">
                     <a href=<%= sport[i].url%>>
-<<<<<<< HEAD
-                        <img class="card-img-top"  alt=" " class="w3-round-large" src=<%=sport[i].urlToImage%>>
-=======
                         <img class="card-img-top" alt=" " class="w3-round-large" src=<%=sport[i].urlToImage%>>
->>>>>>> 6d8582a51cc456956b26ca8771f6c0586016e3b3
                     </a>
                     <div class="card-body">
                       <h5 class="card-title"><%= sport[i].title%></h5>
-                      <small><%= sport[i].publishedAt.substring(0,10)%></small>
                       <small class="card-text"><%= sport[i].description%></small>
                     </div>
                 </div>
