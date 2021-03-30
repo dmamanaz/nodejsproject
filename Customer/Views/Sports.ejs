@@ -17,9 +17,11 @@
             flex-wrap: wrap;
             padding: 0 4px;
         }
-        .img {
+        .card-img-top {
             margin-top: 8px;
             vertical-align: middle;
+            width: 40rem;
+            height: 25rem;
         }
     </style>
     <body>
@@ -31,7 +33,7 @@
                 <%for(let i=0; i<sport.length; i++) {%>
                 <div class="card" style="width: 50%;">
                     <a href=<%= sport[i].url%>>
-                        <img class="card-img-top" src=<%=sport[i].urlToImage%> alt="Card image cap">
+                        <img class="card-img-top"  alt=" " class="w3-round-large" src=<%=sport[i].urlToImage%>>
                     </a>
                     <div class="card-body">
                       <h5 class="card-title"><%= sport[i].title%></h5>
