@@ -15,12 +15,13 @@
         .row{
             display: flex;
             flex-wrap: wrap;
-            padding: 0 4px;
+            padding-top: 1%;
+            padding-bottom: 1%;
         }
         .card-img-top {
             margin-top: 8px;
             vertical-align: middle;
-            width: 30rem;
+            width: 40rem;
             height: 25rem;
         }
     </style>
@@ -37,13 +38,13 @@
                     </a>
                     <div class="card-body">
                       <h5 class="card-title"><%= sport[i].title%></h5>
-                      <small><%= sport[i].publishedAt.substring(0,10)%></small>
                       <small class="card-text"><%= sport[i].description%></small>
                     </div>
                 </div>
                 <%}%>
             </div>
         </div>
+        <%-include('./Partials/chat.ejs')%>
     </body>
     <footer>
         <%-include('./Partials/footer.ejs')%>
