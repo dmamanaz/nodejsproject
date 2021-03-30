@@ -18,16 +18,18 @@
     <form name = "contactForm" action="/addContactUs" method = "POST"> <!--  -->
         <div class="row">
         
-            <div class="column1">
-                <label for = "Contact_email">Email</label>
-                <input type="email" id = "Contact_email" name = "Contact_email" class="form-control" placeholder="Your Email">
-            </div>
-
-            <div class="column2">
-                <label for = "Contact_message">Message</label>
-                <textarea class = "form-control" id="Contact_message" name="Contact_message" rows="4" cols="50" placeholder="What is your concern?"></textarea>
+            <div class = "row" id = "box">
+                <div class="column1">
+                    <label for = "Contact_email">Email</label>
+                    <input type="email" id = "Contact_email" name = "Contact_email" class="form-control" placeholder="Your Email">
+                </div>
                 
-            </div>
+                <div class="column2">
+                    <label for = "Contact_message">Message</label>
+                    <textarea class = "form-control" id="Contact_message" name="Contact_message" rows="11" cols="50" placeholder="What is your concern?"></textarea>
+                </div>
+            </div>    
+
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary" onclick  = "myFunction()">Submit</button>
@@ -38,6 +40,7 @@
     <div class="alert alert-info"  style = <%=msg? 'visibility: visible': 'visibility: hidden'%> id="msg">
                 <%=msg%>
     </div>
+
 </body>
 <footer>
     <%-include('./Partials/footer.ejs')%>
