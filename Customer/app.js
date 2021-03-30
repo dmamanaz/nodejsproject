@@ -1,8 +1,8 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import axios from 'axios'
-import cors from 'cors'
-import path from 'path'
+import express from 'express';
+import bodyParser from 'body-parser';
+import axios from 'axios';
+import cors from 'cors';
+import path from 'path';
 import http from 'http'
 import socketIO from 'socket.io'
 import 'babel-polyfill'
@@ -73,7 +73,7 @@ app.get('/', (req,res)=>{
             NewsModel.find({}).limit(3).sort( {"News_insertTime": -1} ).exec( (err,data)=>{
                 console.log(err)
                 const news = data
-                console.log("news : ", news)
+                //console.log("news : ", news)
                 
                 res.render('home', {
                     weather,
