@@ -6,3 +6,4 @@ const ContactUsModel = new Schema(
     Contact_message:{type:String},
 })
 module.exports = mongoose.model("Contactus", ContactUsModel,"edureka_contacts")
+

@@ -84,35 +84,28 @@ app.get('/', (req,res)=>{
         })
     })
 })
-app.get('/sports',(req,res)=>
+app.get('/sports',(req,response)=>
 {
-    const apiUrl = 'https://newsapi.org/v2/top-headlines'
+    const apiUrl = 'https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=884aeb5b9df34b4080592935e05a5417'
     //include the todays_date in ISO format
-    const todays_date = new Date().toISOString().substring(0,10);
-    axios.get(apiUrl,{
-
-        params:{
-            sources:'espn, nfl-news, the-sports-bible',
-            from: todays_date,
-            sortBy:'Popularity',
-            language:'en',
-            apiKey:'884aeb5b9df34b4080592935e05a5417'
-            
-        }
-    }).then((res) =>
+    axios.get(apiUrl)
+    .then((res) =>
     {
-        const data = res.data.articles;
-        res.render('Sport.ejs',data);
+        const sport = res.data.articles;
+        response.render('Sports.ejs',{sport})
+
     }).catch(function(err)
     {
-        console.log(err);
+        
+        console.log("test error", err);
     })
-    
+    // res.render('Sports.ejs',{title:"test my title"});
 })
 app.get('/about_us', (req,res)=>{
     res.render('about_us.ejs')
 })
 app.get('/contact_us', (req,res)=>{
+    
     res.render('contact_us.ejs', {
         msg: req.query.msg?req.query.msg:''
     })
@@ -126,6 +119,7 @@ app.post('/addContactUs', (req,res)=>{
         , (err, data) => {
             if(err){
                 const htmlMsg = encodeURIComponent('Error : ', error);
+            
                 res.redirect('/contact_us/?msg=' + htmlMsg)
             }else{
                 const htmlMsg = encodeURIComponent('ContactUs Message Saved OK !');
@@ -134,9 +128,6 @@ app.post('/addContactUs', (req,res)=>{
         }) 
     
 })
-
-
-
 //Create the server for the chat rooms 
 const server = http.createServer(app).listen(app.get('port'), () => {
     console.log("Creating the server chat rooms " + app.get('port'));

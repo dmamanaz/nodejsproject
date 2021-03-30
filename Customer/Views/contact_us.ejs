@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/contactStyles.css">
+    <title>ContactUs</title>
+    <%-include('./Partials/header.ejs')%>
+</head>
+<body>
+    <div class="contactHead">
+        <h1>Contact Us</h1>
+    </div>
+    <form name = "contactForm" action="/addContactUs" method = "POST"> <!--  -->
+        <div class="row">
+        
+            <div class = "row" id = "box">
+                <div class="column1">
+                    <label for = "Contact_email">Email</label>
+                    <input type="email" id = "Contact_email" name = "Contact_email" class="form-control" placeholder="Your Email">
+                </div>
+                
+                <div class="column2">
+                    <label for = "Contact_message">Message</label>
+                    <textarea class = "form-control" id="Contact_message" name="Contact_message" rows="11" cols="50" placeholder="What is your concern?"></textarea>
+                </div>
+            </div>    
+
+        </div>
+    </form>
+    
+    <!-- Find way to hide and display message if successful. -->
+    <div class="alert alert-info"  style = <%=msg?'visibility: visible': 'visibility: hidden'%> id="msg">
+                <%=msg%>
+    </div>
+
+</body>
+<footer>
+    <%-include('./Partials/footer.ejs')%>
+</footer>
+</html>

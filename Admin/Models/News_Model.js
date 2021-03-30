@@ -10,4 +10,4 @@ const NewsModel = new Schema({
     News_insertTime: {type:Number}
 })
 
-module.exports = mongoose.model('newslist', NewsModel, 'news_list')
+module.exports = mongoose.model('newslist', NewsModel, 'edureka_data')
