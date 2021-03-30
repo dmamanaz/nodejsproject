@@ -13,15 +13,21 @@
 </head>
 
 <body>
-    <!-- Weather report section -->
+    <!-- Header section -->
+    <style>
+
+    </style>
+
     <style>
         .card {
-            background: rgb(17, 96, 170);
+            width: 211px;
+            background: white;
             color: #fff;
-            width: 100%;
+            width: 40%;
+            margin-left: 2%;
         }
 
-        .card-img-top {
+        .card-img {
             width: 100%;
             height: 15vw;
             object-fit: cover;
@@ -55,34 +61,32 @@
             color: white;
             font-weight: bold;
         }
+
+        .card-text {
+            color: black;
+            position: sticky;
+        }
     </style>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-text">
-                        <div class="title">
-                            <span>
-                                <%=weather.City%>
-                            </span>
-                        </div>
-                        <div class="card-body text-center">
-                            <span class="topTemp card-title">
-                                <%=weather.Description%>
-                            </span>
-                            <img class="card-img-responsive" src=<%=weather.Icon%>> <br>
-                            <span class="curnt">Current temp<%=weather.Temperature%>°C</span><br>
-                            <span class="max">Max temp:<%=weather.Temp_max%>°C</span> <br>
-                            <span class="min"> Min temp:<%=weather.Temp_min%>°C</span>
-                        </div>
-                        <p class="card-text" style="color:white"><small>Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
 
-            </div>
-        </div>
+    <!-- Weather report section -->
+    <style>
+        .header {
+            background-color: blue !important;
+            background: center center / cover no-repeat;
+        }
 
-    </div>
+        .jumbotron {
+            background-color: #87CEFA !important;
+        }
+    </style>
+    <section id="header" class="jumbotron text-center">
+        <h1 class="display-3"> <%=weather.City%> </h1>
+        <span style="color: white;"><%=weather.Description%></span>
+        <img style="color: white;" src=<%=weather.Icon%>> <br>
+        <span style="color: white;">Current temp<%=weather.Temperature%>°C</span><br>
+        <span style="color: white;">Max temp:<%=weather.Temp_max%>°C</span> <br>
+        <span style="color: white;"> Min temp:<%=weather.Temp_min%>°C</span>
+    </section>
     <style>
         .carousel-item {
             /* height: 20rm; */
@@ -91,24 +95,46 @@
             position: relative;
             background-position: center;
             background-size: cover;
-            height: 50vh;
+            height: 45vh;
             width: 100%;
-            padding: 30px;
-
+            padding-top: 0%;
 
         }
 
-        .media {
-            min-width: 600px;
-            position: relative;
+        #caroRow {
+            background-color: #002cb195;
+            border: 4px solid black;
+            width: 70%;
+            height: 450px;
+            border-radius: 30px;
+            margin: auto;
             text-align: center;
-            padding-top: 20px;
-            padding-bottom: 20px;
+    
+            
+        }
+
+        #innerCaroImg {
+            display: inline-block;
+            height: 50%;
+            
+            
+        }
+
+        .carousel-inner {
+            
+        }
+
+        #rowCarosel {
+            
+        }
+
+        #imgCarousel {
+            
         }
     </style>
-    <div class="row">
-        <div class="container w-50 h-10 d-inline-block" style="background-color:black;">
-            <div class="row">
+    <div class="row" id="caroRow">
+        <div class="container w-50 h-10 d-inline-block" style="background-color:black;" id="innerCaroImg">
+            <div class="row" id="rowCarosel">
                 <div id="imgCarousel" class="carousel slide carousel-fade" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="imgCarousel" data-slide-to="0" class="active"></li>
@@ -152,44 +178,43 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="media">
-        <div class="media-body">
-            <h5 class="mt-0" style="color: black;">Some story related to news</h5>
-            THIS IS SOME HARDCORE NEWS
+    </div> 
+    <div class="container">
+        <div class="row"
+            style="display: flex;justify-content: center;flex-direction: row;  padding-top: 1%; padding-bottom: 8%;">
+            <% for(var i=0; i < news.length; i++) { %>
+            <div class="card col-md-2">
+                <div class="row">
+                    <img class="card-img" src=<%=news[i].News_urlToImage%>>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"> <small>
+                            <%=news[i].News_title%>
+                        </small></p>
+                </div>
+            </div>
+            <%}%>
         </div>
-    </div>
-    
+    </div>  
     <%-include('./Partials/chat.ejs')%>
-    
-    <!-- <div class="container-sm" style="background:yellow;">
-        <p class="card-title" style="color: black;"><%=news[1].News_title%></p>
-        <p class="card-text" style="color: black;"><%=news[1].News_descrption%></p> 
-
-
-</div> -->
-    <!-- <% for(var i=0; i < news.length; i++) { %> -->
-    <!-- <img class="card-img-top" src=<%=news[i].News_urlToImage%>> -->
-    <!-- <p class="card-title"> <small><%=news[i].News_title%></small></p>
-        <p class="card-text"><small> <%=news[i].News_descrption%></small></p>   <%}%>  -->
-    <!-- Optional JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript"> </script>
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-        </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-        </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-        </script>
-
-    <footer>
-        <%-include('./Partials/footer.ejs')%>
-    </footer>
+     <!-- Optional JavaScript -->
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script type="text/javascript"> </script>
+ 
+     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+     </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+     </script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+     </script>
+ 
+     <footer>
+         <%-include('./Partials/footer.ejs')%>
+      </footer>
 </body>
 
 </html>
