@@ -18,7 +18,7 @@ const session = require('express-session');
 router.use(session({secret: 'edurekaSecret1', resave: false, saveUninitialized: true}));
 router.post('/login', (req, res) => {
 
-    User.findOne({ User_email: req.body.email }, (err, user) => {
+    User.findOne({ User_email: req.body.User_email }, (err, user) => {
       console.log("/login : user => ", user)
       if (err) return res.status(500).send('Error on the server.');
       let htmlMsg
@@ -26,7 +26,7 @@ router.post('/login', (req, res) => {
         htmlMsg = encodeURIComponent('Email not found, try again ...');
         res.redirect('/?invalid=' + htmlMsg);
       }else{
-        const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+        const passwordIsValid = bcrypt.compareSync(req.body.User_password, user.User_password);
         if (!passwordIsValid) {
           return res.status(401).send({ auth: false, token: null });
         }
@@ -49,7 +49,7 @@ router.get('/newsForm', (req, res)=>{
     }
     jwt.verify(token, config.secret, (err, decoded)=>{
         if (err) { res.redirect('/') }
-        User.findById(decoded.id, { password: 0}, (err,user)=>{
+        User.findById(decoded.id, { User_password: 0}, (err,user)=>{
             if (err) {res.redirect('/')}
             if (!user) {res.redirect('/')} 
             console.log("/newsForm : user ==> ", user)   
@@ -69,7 +69,7 @@ router.get('/getNews', (req, res)=>{
     }
     jwt.verify(token, config.secret, (err, decoded)=>{
         if (err) { res.redirect('/') }
-        User.findById(decoded.id, { password: 0}, (err,user)=>{
+        User.findById(decoded.id, { User_password: 0}, (err,user)=>{
             if (err) {res.redirect('/')}
             if (!user) {res.redirect('/')} 
             console.log("/newsForm : user ==> ", user)   
@@ -105,11 +105,11 @@ router.put('/updateNews', (req,res)=>{
     console.log("/updateNews : id : ", id)
     Newslist.findOneAndUpdate({_id: id},{
         $set:{
-            News_title: req.body.title,
-            News_description: req.body.description,
-            News_url: req.body.url,
-            News_urlToImage: req.body.urlToImage,
-            News_publishedAt: req.body.publishedAt,
+            News_title: req.body.News_title,
+            News_description: req.body.News_description,
+            News_url: req.body.News_url,
+            News_urlToImage: req.body.News_urlToImage,
+            News_publishedAt: req.body.News_publishedAt,
             News_insertTime: Date.now()
         }
     },{
@@ -145,7 +145,7 @@ router.post('/addNews', (req, res)=>{
             console.log("/newsForm : user ==> ", user)   
             
             const d = Date.now()
-            const news = {...req.body, insertTime: d }
+            const news = {...req.body,News_insertTime: d }
             console.log("/addNews : news => ", news)
 
             Newslist.create(
@@ -167,14 +167,14 @@ router.get('/logout', (req,res) => {
 })
 router.post('/register', (req,res) => {
     console.log("/register : req.body ==> ", req.body)
-    User.findOne({ User_email: req.body.email }, (err, user) => {
+    User.findOne({ User_email: req.body.User_email }, (err, user) => {
       if (err) return res.status(500).send('Error on the server.');
       let htmlMsg
       if(!user){ //add new user
-        const hashedPasword = bcrypt.hashSync(req.body.password, 8);
+        const hashedPasword = bcrypt.hashSync(req.body.User_password, 8);
         User.create({
-            User_name: req.body.name,
-            User_email: req.body.email,
+            User_name: req.body.User_name,
+            User_email: req.body.User_email,
             User_password: hashedPasword,
         }, (err, user) => {
             if(err) return res.status(500).send('There was a problem registering user')

@@ -36,14 +36,6 @@ app.get('/',(req,res) => {
     
 })
 
-app.get('/register',(req,res) => {
-  sess=req.session;
-  sess.email=" "
- 
-  res.render('signup')
-  
-})
-
 app.post('/api/addContactUs', (req,res)=>{
   
   console.log("/api/addContactUs : req.body : ", req.body)
