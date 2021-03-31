@@ -13,12 +13,17 @@
 </head>
 
 <body>
+    <!-- Header section -->
+    <style>
+
+    </style>
+
     <style>
         .card {
             width: 211px;
             background: white;
             color: #fff;
-            width: 40%;
+            width: 100%;
             margin-left: 2%;
         }
 
@@ -60,6 +65,10 @@
         .card-text {
             color: black;
             position: sticky;
+            font-family:Georgia, serif; 
+            font-weight:bold; 
+            
+            
         }
     </style>
 
@@ -82,6 +91,29 @@
         <span style="color: white;">Max temp:<%=weather.Temp_max%>°C</span> <br>
         <span style="color: white;"> Min temp:<%=weather.Temp_min%>°C</span>
     </section>
+    <!-- <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-text">
+                        <div class="title">
+                            <span> <%=weather.City%></span>
+                        </div>
+                        <div class="card-body text-center">
+                            <span class="topTemp card-title"><%=weather.Description%></span>
+                            <img class="card-img-responsive" src=<%=weather.Icon%>> <br>
+                            <span class="curnt">Current temp<%=weather.Temperature%>°C</span><br>
+                            <span class="max">Max temp:<%=weather.Temp_max%>°C</span> <br>
+                            <span class="min"> Min temp:<%=weather.Temp_min%>°C</span>
+                        </div>
+                        <p class="card-text" style="color:white"><small>Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div> -->
     <style>
         .carousel-item {
             /* height: 20rm; */
@@ -99,7 +131,7 @@
         #caroRow {
             background-color: #002cb195;
             border: 4px solid black;
-            width: 70%;
+            width: 45%;
             height: 450px;
             border-radius: 30px;
             margin: auto;
@@ -114,11 +146,29 @@
             
             
         }
+
+        .carousel-inner {
+            
+        }
+
+        #rowCarosel {
+            
+        }
+
+        #imgCarousel {
+            
+        }
+
+
+
+
+
     </style>
     <div class="row" id="caroRow">
-        <div class="container w-50 h-10 d-inline-block" style="background-color:black;" id="innerCaroImg">
+        <!-- class="container w-75 h-10 d-inline-block" style="  margin-top:40px;  padding-top:20px; padding-bottom:20px; background-color:black;" id="innerCaroImg" -->
+        <div class="container w-75 h-10 d-inline-block" style="  margin-top:40px;  padding-top:20px; padding-bottom:20px; background-color:black;" id="innerCaroImg">
             <div class="row" id="rowCarosel">
-                <div id="imgCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+                <div id="imgCarousel" class="carousel slide carousel-fade" data-ride="carousel" style="">
                     <ol class="carousel-indicators">
                         <li data-target="imgCarousel" data-slide-to="0" class="active"></li>
                         <li data-target="imgCarousel" data-slide-to="1"></li>
@@ -161,25 +211,30 @@
                 </div>
             </div>
         </div>
-    </div> 
-    <div class="container">
+    </div>
+    <script src="/socket.io/socket.io.js" type="text/javascript"> </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="chatclient_handler.js" type="text/javascript"></script>
+    <div class="container" style=" padding-top: 3%; padding-bottom: 8%; width:100%; ">
         <div class="row"
-            style="display: flex;justify-content: center;flex-direction: row;  padding-top: 1%; padding-bottom: 8%;">
+            style="display: flex; justify-content: center; flex-direction: row; padding-bottom: 8%;">
             <% for(var i=0; i < news.length; i++) { %>
-            <div class="card col-md-2">
-                <div class="row">
-                    <img class="card-img" src=<%=news[i].News_urlToImage%>>
-                </div>
-                <div class="card-body">
-                    <p class="card-text"> <small>
-                            <%=news[i].News_title%>
-                        </small></p>
+            <div style="background-color: #002cb195; width:300px; border: 4px solid black; border-radius: 30px; margin-left: 2%; margin-bottom: 2%; padding-top:2%; padding-bottom:2%;">   
+                <div class="card col-md-10" style="margin-left:auto; margin-right:auto; height:100%; ">
+                    <div class="row">
+                        <img class="card-img" style="max-width: 100%; min-width:100%; height:auto;" src=<%=news[i].News_urlToImage%>>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"> <small>
+                                <%=news[i].News_title%>
+                            </small></p>
+                    </div>
                 </div>
             </div>
             <%}%>
         </div>
-    </div>  
-    <%-include('./Partials/chat.ejs')%>
+    </div>
+     <%-include('./Partials/chat.ejs')%>    
      <!-- Optional JavaScript -->
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <script type="text/javascript"> </script>
@@ -197,7 +252,7 @@
  
      <footer>
          <%-include('./Partials/footer.ejs')%>
-      </footer>
+            </footer>
 </body>
 
 </html>

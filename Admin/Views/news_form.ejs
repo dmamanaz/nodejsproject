@@ -26,18 +26,18 @@
                 <div class="form-group">
 
                     <label for="News_url">News Link:</label>
-                    <input type="text" class="form-control" id="News_url" placeholder="Insert News Url" name="News_url">
+                    <input type="text" class="form-control" id="News_url" placeholder="Insert News Url" name="News_url" required>
 
                 </div>
                 <div class="form-group">
 
                     <label for="News_urlToImage">Image Url:</label>
-                    <input type="text" class="form-control" id="News_urlToImage" placeholder="Insert News_urlToImage" name="News_urlToImage">
+                    <input type="text" class="form-control" id="News_urlToImage" placeholder="Insert News_urlToImage" name="News_urlToImage" required>
 
                 </div>
                 <div class="form-group">
                     <label for="News_publishedAt">Published At:</label>
-                    <input type="text" class="form-control" id="News_publishedAt" placeholder="Insert publish date" name="News_publishedAt">
+                    <input type="date" class="form-control" id="News_publishedAt" placeholder="Insert publish date" name="News_publishedAt" required>
 
                 </div>
                 <div class="alert alert-info" style=<%=msg?'visibility: visible': 'visibility: hidden' %> id="msg">
