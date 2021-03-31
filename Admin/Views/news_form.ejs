@@ -15,45 +15,46 @@
             <form name="form1" action="/admin/addNews" method="POST">
                 <div class="form-group">
 
-                    <label for="title">Title: </label>
-                    <input type="text" class="form-control" id="News_title" placeholder="" name="title" required>
+                    <label for="News_title">Title: </label>
+                    <input type="text" class="form-control" id="News_title" placeholder="Insert Title" name="News_title" required>
 
                 </div>
                 <div class="form-group">
-                    <label for="desc">Description:</label>
-                    <textarea class="form-control" id="News_description" placeholder="" name="desc" required></textarea>
+                    <label for="News_description">Description:</label>
+                    <textarea class="form-control" id="News_description" placeholder="Insert NewsDecription" name="News_description" required></textarea>
                 </div>
                 <div class="form-group">
 
-                    <label for="link">News Link:</label>
-                    <input type="text" class="form-control" id="News_url" placeholder="" name="link">
+                    <label for="News_url">News Link:</label>
+                    <input type="text" class="form-control" id="News_url" placeholder="Insert News Url" name="News_url">
 
                 </div>
                 <div class="form-group">
 
-                    <label for="url">Image Url:</label>
-                    <input type="text" class="form-control" id="News_urlToImage" placeholder="" name="url">
+                    <label for="News_urlToImage">Image Url:</label>
+                    <input type="text" class="form-control" id="News_urlToImage" placeholder="Insert News_urlToImage" name="News_urlToImage">
 
                 </div>
                 <div class="form-group">
-                    <label for="pub">Published At:</label>
-                    <input type="text" class="form-control" id="News_publishedAt" placeholder="" name="pub">
+                    <label for="News_publishedAt">Published At:</label>
+                    <input type="text" class="form-control" id="News_publishedAt" placeholder="Insert publish date" name="News_publishedAt">
 
                 </div>
                 <div class="alert alert-info" style=<%=msg?'visibility: visible': 'visibility: hidden' %> id="msg">
                     <%=msg%>
                 </div>
                 <div class="form-group" style="text-align:center;padding-bottom:20px;">
-                    <button type="submit" class="btn btn-primary">Register</button>
-                    <a href="/" class="btn btn-success" role="button">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <input type="reset" class="btn btn-warning" role="button">
                 </div>
             </form>
 
         </div>
     </div>
+    <footer>
+        <%-include('./Partials/footer.ejs')%>
+    </footer>
 </body>
-<footer>
-    <%-include('./Partials/footer.ejs')%>
-</footer>
+
 
 </html>
