@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Header</title>
+<title>Login Template</title>
 <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -46,17 +46,19 @@
     #pageFooter.first.page {
         page-break-before: avoid
     }
-    .open-button {
-    background-color: #555;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: fixed;
-    bottom: 23px;
-    right: 28px;
-    width: 280px;
+    .open-button { 
+        background: clrBrown;
+        border-top-right-radius: 0.5em;
+        border-top-left-radius: 0.5em;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0.75em;
+        user-select: none;
+        color: #fff;
+        margin-right: 0.75em;
+        color: #fff;
+        font-weight: 300;
+        font-size: 1.025rem;
 }
 
 </style>
@@ -86,8 +88,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="/about_us"><b>About us</b></a>
             </li>
-            <button class="open-button" onclick="openForm()">Chat</button>
-            
+            <h3  class="open-button" onclick="openForm()">
+                <i
+                 class="fas fa-comments"></i>Let's Chat!!!
+            </h3>
         </ul>
     </div>
 
