@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Edit News</title>
+    <%-include('./Partials/header.ejs')%>
+</head>
+
+<body>
+    <div class="content-width" style="min-height: 800px;">
+        <h2 style="text-align:center">News List</h2>
+        <div class="NewsPages">
+    
+            <table class="table table-striped" id="myTable">
+                <thead>
+                    <tr style="background-color:lightslategrey;color:white;">
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Published At</th>
+                        <th scope="col">Edit/Delete</th>
+                    </tr>
+                </thead>
+                <!-- <tbody id="newsTable"> -->
+                <tbody>
+                    <% for(var i=0; i< news.length; i++) {%>
+                        <tr>
+                            <th id="update_title">
+                                <%-news[i].News_title%>
+                            </th>
+                            <td>
+                                <%-news[i].News_description%>
+                            </td>
+                            <td>
+                                <%-news[i].News_publishedAt%>
+                            </td>
+                            <td><button data-target="#myModal" id="<%=news[i]._id%>" type="button"
+                                    class="update btn btn-warning" data-toggle="modal">Edit</button><button type="button"
+                                    class="delete btn btn-danger" id="<%=news[i] %>">Delete</button>
+                            </td>
+                        </tr>
+                        <%}%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <%-include('./Partials/footer.ejs')%>
+</footer>
+</html>
+<script>
+    // DataTable
+    $(document).ready(function () {
+        $('#myTable').DataTable()
+
+    });
+    // edit data
+    $('.update').click(function () {
+        id = this.id;
+        console.log('id is ' + id)
+        $.ajax({
+            type: 'POST',
+            url: '/find_by_id',//changed the url
+            data: { id },
+            success: function (data) {
+                $("#update_id").attr("value", data[0]._id)
+                $("#update_title").attr("value", data[0].title);
+                $("#update_description").attr("value", data[0].description);
+                $("#update_url").attr("value", data[0].url);
+                $("#update_urlToImage").attr("value", data[0].urlToImage);
+                $("#update_publishedAt").attr("value", data[0].publishedAt);
+                $('#myModal').modal({ show: true });
+            },
+            error: function () {
+                alert('No data');
+            }
+        });
+    })
+    // update data
+    $(function () {
+        $('#update_table').on('click', function (e) {
+            var data = $('#update_news').serialize();
+            console.log(">>>>>", data)
+            e.preventDefault();
+            $.ajax({
+                url: '/updateNews',//changed the url
+                type: 'PUT',
+                data: data,
+                success: function (data) {
+                    // Reloads the current page from the server (default: reload from cache)
+                    location.reload({ forceGet: true })
+                },
+                error: function (err) {
+                    console.log("#update_table : err : ", err)
+                }
+            });
+            $('#myModal .close').click()
+        });
+    });
+    // delete data
+    $('.delete').click(function () {
+        var response = confirm("do you want to delete")
+        id = this.id;
+        console.log(response)
+        if (response === true) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/deleteNews',//changed the url
+                method: 'delete',
+                data: { id },
+                success: function (data) {
+                    //console.log('data is '+JSON.stringify(data));                   
+                    // Reloads the current page from the server (default: reload from cache)
+                    location.reload({ forceGet: true })
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        }
+        else {
+            console.log("Cancelled Delete")
+        }
+    });
+
+</script>
