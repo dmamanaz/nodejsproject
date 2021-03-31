@@ -6,8 +6,8 @@ const NewsModel = new Schema({
     News_description: {type:String},
     News_url: {type:String},
     News_urlToImage: {type:String},
-    News_publishedAt: {type:String},
-    News_insertTime: {type:Number}
+    News_publishedAt: {type:Date},
+    News_insertTime: {type:Date}
 })
 
 module.exports = mongoose.model('newslist', NewsModel, 'edureka_data')
