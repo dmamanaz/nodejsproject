@@ -1,4 +1,7 @@
-const app = require('./app')
+//Get the app from the itself
+const App = require('./app')
+
+let app = App.app;
 const express = require('express')
 
 const port = 7080;
@@ -18,8 +21,8 @@ app.use(express.static(__dirname+'/public'))
 app.set('view engine', 'ejs')
 app.set('views', './Views')
 
-const Newslist = require('./models/News_model')
-const Contactuslist = require('./models/Contactus_model')
+const Newslist =  app.newslist;
+const Contactuslist = app.user;
 
 let sess;
 
