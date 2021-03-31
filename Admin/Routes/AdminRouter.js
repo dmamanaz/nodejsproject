@@ -18,7 +18,7 @@ const session = require('express-session');
 router.use(session({secret: 'edurekaSecret1', resave: false, saveUninitialized: true}));
 router.post('/login', (req, res) => {
 
-    User.findOne({ email: req.body.email }, (err, user) => {
+    User.findOne({ User_email: req.body.email }, (err, user) => {
       console.log("/login : user => ", user)
       if (err) return res.status(500).send('Error on the server.');
       let htmlMsg
@@ -105,12 +105,12 @@ router.put('/updateNews', (req,res)=>{
     console.log("/updateNews : id : ", id)
     Newslist.findOneAndUpdate({_id: id},{
         $set:{
-            title: req.body.title,
-            description: req.body.description,
-            url: req.body.url,
-            urlToImage: req.body.urlToImage,
-            publishedAt: req.body.publishedAt,
-            insertTime: Date.now()
+            News_title: req.body.title,
+            News_description: req.body.description,
+            News_url: req.body.url,
+            News_urlToImage: req.body.urlToImage,
+            News_publishedAt: req.body.publishedAt,
+            News_insertTime: Date.now()
         }
     },{
         upsert: true
@@ -167,15 +167,15 @@ router.get('/logout', (req,res) => {
 })
 router.post('/register', (req,res) => {
     console.log("/register : req.body ==> ", req.body)
-    User.findOne({ email: req.body.email }, (err, user) => {
+    User.findOne({ User_email: req.body.email }, (err, user) => {
       if (err) return res.status(500).send('Error on the server.');
       let htmlMsg
       if(!user){ //add new user
         const hashedPasword = bcrypt.hashSync(req.body.password, 8);
         User.create({
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPasword,
+            User_name: req.body.name,
+            User_email: req.body.email,
+            User_password: hashedPasword,
         }, (err, user) => {
             if(err) return res.status(500).send('There was a problem registering user')
             htmlMsg = encodeURIComponent('Registered OK !');

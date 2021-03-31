@@ -59,7 +59,7 @@ app.post('/api/addContactUs', (req,res)=>{
 
 app.get('/api/getLatestNews', (req,res) => {
 
-  Newslist.find({}).limit(3).sort( {insertTime: -1} ).exec((err,data)=>{
+  Newslist.find({}).limit(3).sort( {News_insertTime: -1} ).exec((err,data)=>{
     if (err) res.status(500).send(err)
     else res.json(data)
   })

@@ -6,7 +6,34 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <title>Home</title>
-    <%-include('./Partials/header.ejs')%>
+
+<style>
+    /* header navigation bar */
+    .navbar-dark .navbar-nav .nav-link:focus {
+        color: white;
+        background-color: grey;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Update 24X7 Admin</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav nav-justified w-15">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/register"><b>Sign in</b> <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
 </head>
 
 <body>
@@ -16,7 +43,7 @@
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="/register" method="post">
+                        <form id="login-form" class="form" action="/admin/register" method="post">
                             <h3 class="text-center text-info">REGISTER</h3>
                             <div class="form-group">
                                 <label for="username" class="text-info">Name</label><br>
