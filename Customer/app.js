@@ -129,42 +129,79 @@ app.post('/addContactUs', (req,res)=>{
     
 })
 
-app.use(express.static(path.join(__dirname,'chat')))
-//Create the server for the chat rooms 
-    const server = http.createServer(app).listen(app.get('port'), () => {
-        console.log("Creating the server chat rooms " + app.get('port'));
-    });
-    const io = require('socket.io').listen(server);
-    let users = [];
-    io.on('connection',  (socket) => {
+// app.use(express.static(path.join(__dirname,'chat')))
+// //Create the server for the chat rooms 
+//     const server = http.createServer(app).listen(app.get('port'), () => {
+//         console.log("Creating the server chat rooms " + app.get('port'));
+//     });
+//     const io = require('socket.io').listen(server);
+//     let users = [];
+//     io.on('connection',  (socket) => {
 
-        socket.on('connect', ()=>{
-            console.log("New connection socket.id : ", socket.id)
-        })
+//         socket.on('connect', ()=>{
+//             console.log("New connection socket.id : ", socket.id)
+//         })
 
-        socket.on('disconnect', ()=>{
-            const updatedUsers = users.filter(user => user != socket.nickname)
-            users = updatedUsers
-            io.emit('userlist', users)
-        })
+//         socket.on('disconnect', ()=>{
+//             const updatedUsers = users.filter(user => user != socket.nickname)
+//             users = updatedUsers
+//             io.emit('userlist', users)
+//         })
 
     
-        socket.on('nick', (nickname) => {
-            console.log("nick => nickname : ", nickname)
-            socket.nickname = nickname
-            users.push(nickname)
+//         socket.on('nick', (nickname) => {
+//             console.log("nick => nickname : ", nickname)
+//             socket.nickname = nickname
+//             users.push(nickname)
 
-            console.log("server : users : ", users)
+//             console.log("server : users : ", users)
         
-            io.emit('userlist', users);
-        });
-        socket.on('chat', (data) => {
-            console.log("chat => nickname : ", socket.nickname)
-            const d = new Date()
-            const ts = d.toLocaleString()
-            const response = `${ts} : ${socket.nickname} : ${data.message}`
-            io.emit('chat', response)
-        });
-    });
+//             io.emit('userlist', users);
+//         });
+//         socket.on('chat', (data) => {
+//             console.log("chat => nickname : ", socket.nickname)
+//             const d = new Date()
+//             const ts = d.toLocaleString()
+//             const response = `${ts} : ${socket.nickname} : ${data.message}`
+//             io.emit('chat', response)
+//         });
+//     });
+
+app.use(express.static(path.join(__dirname,'chat')))
+//Create the server for the chat rooms 
+
+let server = http.createServer(app).listen(app.get('port'),()=>{
+    console.log("Creating the server chat rooms " + app.get('port'));
+})
+
+let io = socketIO(server)
+
+io.sockets.on('connection',(socket)=>{
+
+
+    socket.on('disconnect',()=>{
+        const updateUsers = users.filter(user=> user != socket.nick)
+        users = updateUsers
+        socket.emit('userlist',users)
+    })
+
+    let list =socket.client.conn.server.clients
+    let users=Object.keys(list)
+
+    //emitting events with labels 
+    socket.on('nick',(nickname)=>{
+        socket.nickname=nickname
+        users.push(nickname)
+        socket.emit('userlist',users)
+    })
+    
+    socket.on('chat',(data)=>{
+        const d = new Date()
+        const ts = d.toLocaleString()
+        const response = `${ts} : ${socket.nickname}: ${data.message}`
+        socket.emit('chat', response)
+        socket.broadcast.emit('chat',response)
+    })
+})
 
 
