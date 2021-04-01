@@ -43,9 +43,20 @@ html {
     
 }
 
+#box {
+    background-color: #002cb195;
+    border: 1px solid black;
+    width: 95%;
+    height: 650px;
+    border-radius: 30px;
+    
+    
+    
+}
+
 .googleMapLocation {
 
-    padding-top: 2%;
+    padding-top: 3%;
     padding-bottom: 2%;
     display: inline-block;
     text-align: right;
@@ -58,8 +69,9 @@ html {
 
 .description {
 
-    width: 600px;
-    padding-top: 2%;
+    width: 650px;
+    padding-top: 5%;
+    padding-bottom: 2%;
     display: inline-block;
     text-align: left;
     margin-left: 25px;
@@ -70,6 +82,14 @@ html {
     padding: 0px;
     width: 600px;
     min-width:605px;
+    height:80%;
+}
+
+.w3-container {
+    width: 600px; 
+    background-color:white;
+    border: 1px solid black;
+    border-radius: 30px;
 }
 
 .companyDesc {
@@ -77,7 +97,9 @@ html {
     width: 600px; 
     height: 450px;
     margin: 0px;
+    padding: 6%;
     
+
 }
 
 .companyName {
@@ -87,7 +109,7 @@ html {
 }
   
 .aboutHead {
-    padding: 3%;
+    padding: 2%;
     text-align: center;
     background-color: #474e5d;
     color: white;

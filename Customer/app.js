@@ -118,11 +118,11 @@ app.post('/addContactUs', (req,res)=>{
             record  
         , (err, data) => {
             if(err){
-                const htmlMsg = encodeURIComponent('Error : ', error);
+                const htmlMsg = encodeURIComponent('Error message (cannot send message) : ', error);
             
                 res.redirect('/contact_us/?msg=' + htmlMsg)
             }else{
-                const htmlMsg = encodeURIComponent('ContactUs Message Saved OK !');
+                const htmlMsg = encodeURIComponent('Your message was sucessfully sent!');
                 res.redirect('/contact_us/?msg=' + htmlMsg)
             }
         }) 
