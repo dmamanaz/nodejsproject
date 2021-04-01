@@ -1,13 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel ="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<title>Home</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+<link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css">
+
+<title>Log In</title>
 <style>
     /* header navigation bar */
     .navbar-dark .navbar-nav .nav-link:focus {
@@ -16,9 +20,11 @@
     }
 </style>
 
+
+</head>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a href="" class="navbar-brand"><i class="fa fa-align-justify" title="Align Justify"></i> Update 24X7 Admin</a>
-
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,25 +39,25 @@
                 <a class="nav-link" href="/admin/register"><b>Sign in</b> <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-
     </div>
-
 </nav>
 
-
-</head>
 <body>
+    <br><br>
     <div id="login">
-        <h3 class="text-center text-white pt-5">Updatex24</h3>
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form" action="/admin/login" method="post">
                             <h3 class="text-center text-info">LOG IN</h3>
-                            <p class="errr"><%=invalid%></p>
-					        <p class="succ"><%=msg%></p>
-                            <div class="form-group" data-validate = "Valid email is: a@b.c">
+                            <p class="errr">
+                                <%=invalid%>
+                            </p>
+                            <p class="succ">
+                                <%=msg%>
+                            </p>
+                            <div class="form-group" data-validate="Valid email is: a@b.c">
                                 <label for="User_email" class="text-info">Email</label><br>
                                 <input type="email" name="User_Email" id="User_Email" class="form-control">
                             </div>
@@ -60,13 +66,14 @@
                                 <input type="password" name="User_Password" id="User_Password" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <label for="remember-me" class="text-info"><span>Remember me</span> <span><input
+                                            id="remember-me" name="remember-me" type="checkbox"></span></label><br>
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="Log In">
                                 <input type="reset" name="submit" class="btn btn-info btn-md" value="RESET">
                             </div>
                             <div id="register-link" class="text-right">
                                 <a>Don't have an account?</a>
-                                <a href="/admin/register" class="text-info">Register</a>        
+                                <a href="/admin/register" class="text-info">Register</a>
                             </div>
                         </form>
                     </div>
@@ -75,4 +82,5 @@
         </div>
     </div>
 </body>
+
 </html>
